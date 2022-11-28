@@ -94,10 +94,10 @@ class EditProfileForm(forms.ModelForm):
         validators=[start_with_09]
     )
     bio = forms.CharField(required=False,
-                                widget=forms.Textarea(
-                                    {'class': "w-100 p-2 comment-area", "placeholder": "بیوگرافی", "rows": 3, })
-                                )
-    image = forms.ImageField(required=False,)
+                          widget=forms.Textarea(
+                              {'class': "w-100 p-2 comment-area", "placeholder": "بیوگرافی", "rows": 3, })
+                          )
+    image = forms.ImageField(required=False, )
 
     class Meta:
         model = User
@@ -111,6 +111,7 @@ class EditProfileForm(forms.ModelForm):
                 params={'value': f"{phone}"}
             )
         return phone
+
 
 class ChangePasswordForm(PasswordChangeForm):
     def __init__(self, user, *args, **kwargs):

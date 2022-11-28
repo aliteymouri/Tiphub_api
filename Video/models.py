@@ -53,12 +53,12 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name="کاربر")
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies',
                                verbose_name="زیرمجموعه")
-    caption = models.TextField("متن کامنت ", )
+    text = models.TextField("متن کامنت ", )
     is_active = models.BooleanField("وضعیت", default=True)
     created_at = models.DateTimeField("تاریخ ثبت در ", auto_now_add=True)
 
     def __str__(self):
-        return F' نظر : {self.caption[:30]} / توسط : {self.author.fullname}'
+        return F' نظر : {self.text[:30]} / توسط : {self.author.fullname}'
 
     class Meta:
         verbose_name = "نظر"

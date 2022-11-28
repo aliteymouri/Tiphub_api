@@ -11,5 +11,4 @@ class UserSerializer(serializers.ModelSerializer):
         exclude = ('password', 'last_login', 'user_permissions', 'groups')
 
     def get_date_joined(self, obj):
-        date = JalaliDate(obj.date_joined, locale=('fa'))
-        return date.strftime("%c")
+        return JalaliDate(obj.date_joined, locale=('fa')).strftime("%c")

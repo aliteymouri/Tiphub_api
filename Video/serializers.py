@@ -5,10 +5,14 @@ from rest_framework import serializers
 
 class CommentSerializer(serializers.ModelSerializer):
     video = serializers.StringRelatedField(read_only=True, )
+    created_at = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
         fields = '__all__'
+
+    def get_created_at(self, obj):
+        return JalaliDate(obj.created_at, locale=('fa')).strftime('%c')
 
 
 class VideoSerializer(serializers.ModelSerializer):
