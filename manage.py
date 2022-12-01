@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Tibhub_Api.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Tiphub_Api.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

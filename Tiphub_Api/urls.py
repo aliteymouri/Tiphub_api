@@ -1,4 +1,4 @@
-"""Tibhub_Api URL Configuration
+"""Tiphub_Api URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('Account.urls')),
-    path('', include('Video.urls')),
-]
+                  path('admin/', admin.site.urls),
+                  path('', include('Account.urls')),
+                  path('', include('Video.urls')),
+
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

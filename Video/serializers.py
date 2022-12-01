@@ -4,8 +4,8 @@ from rest_framework import serializers
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    video = serializers.StringRelatedField(read_only=True, )
-    created_at = serializers.SerializerMethodField()
+    video = serializers.StringRelatedField(read_only=True,)
+    created_at = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Comment
@@ -17,8 +17,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class VideoSerializer(serializers.ModelSerializer):
     # SerializerMethodFields
-    created_at = serializers.SerializerMethodField()
-    updated_on = serializers.SerializerMethodField()
+    created_at = serializers.SerializerMethodField(read_only=True)
+    updated_on = serializers.SerializerMethodField(read_only=True)
     # Relations
     publisher = serializers.SlugRelatedField(read_only=True, slug_field='email')
     category = serializers.SlugRelatedField(many=True, read_only=True, slug_field='title')
@@ -40,7 +40,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
 class SubCategorySerializer(serializers.ModelSerializer):
     videos = serializers.StringRelatedField(many=True, read_only=True)
-    created_at = serializers.SerializerMethodField()
+    created_at = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = SubCategory
@@ -51,7 +51,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    created_at = serializers.SerializerMethodField()
+    created_at = serializers.SerializerMethodField(read_only=True)
     subcategories = SubCategorySerializer(many=True)
 
     class Meta:

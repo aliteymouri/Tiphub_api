@@ -15,6 +15,25 @@ class UsersListView(ListAPIView):
     serializer_class = UserSerializer
 
 
+class EditProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req):
+        ser = UserSerializer(instance=req.user, data=req.data, partial=True)
+        if ser.is_valid():
+            ser.save()
+            return Response("User Info Updated Successfully", status=status.HTTP_201_CREATED)
+        return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserPanelView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, req):
+        ser = UserSerializer(instance=req.user)
+        return Response(ser.data, status=status.HTTP_200_OK)
+
+
 class LogoutView(APIView):
     def get(self, req):
         logout(req)
