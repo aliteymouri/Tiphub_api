@@ -45,15 +45,9 @@ class ChangePasswordView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     model = User
 
-<<<<<<< HEAD
     def update(self, req, *args, **kwargs):
         user = req.user
         serializer = self.get_serializer(data=req.data)
-=======
-    def update(self, request, *args, **kwargs):
-        user = request.user
-        serializer = self.get_serializer(data=request.data)
->>>>>>> 18bdf0486bd574d38f2e514d3f7198e7d0cde83d
         if serializer.is_valid():
             user.set_password(serializer.data.get("new_password"))
             user.save()
