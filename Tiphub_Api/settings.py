@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Libraries
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_cleanup.apps.CleanupConfig',
 
 ]
 

@@ -1,9 +1,9 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAdminUser
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ChangePasswordSerializer
 from django.contrib.auth import logout
 from rest_framework import status
 from .models import User
@@ -38,3 +38,18 @@ class LogoutView(APIView):
     def get(self, req):
         logout(req)
         return Response('Logged out Successfully', status=status.HTTP_200_OK)
+
+
+class ChangePasswordView(UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    permission_classes = (IsAuthenticated,)
+    model = User
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            user.set_password(serializer.data.get("new_password"))
+            user.save()
+            return Response("Password Updated", status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
