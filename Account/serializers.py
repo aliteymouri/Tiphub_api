@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_phone(self, value):
         if value[:2] != "09" or len(value) < 11:
-            raise serializers.ValidationError('یک شماره تماس معتبر وارد کنید')
+            raise serializers.ValidationError('please enter a valid phone')
         return value
 
 
