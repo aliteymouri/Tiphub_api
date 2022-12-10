@@ -22,7 +22,7 @@ class EditProfileView(APIView):
         ser = UserSerializer(instance=req.user, data=req.data, partial=True)
         if ser.is_valid():
             ser.save()
-            return Response("User Info Updated Successfully", status=status.HTTP_201_CREATED)
+            return Response("عملیات با موفقیت انجام شد", status=status.HTTP_201_CREATED)
         return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -45,11 +45,11 @@ class ChangePasswordView(UpdateAPIView):
         if serializer.is_valid():
             user.set_password(serializer.data.get("new_password"))
             user.save()
-            return Response("Password Updated", status=status.HTTP_201_CREATED)
+            return Response("گذرواژَه تان با موفقیت تغییر کرد", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutView(APIView):
     def get(self, req):
         logout(req)
-        return Response('Logged out Successfully', status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Apps
     'Video.apps.VideoConfig',
     'Account.apps.AccountConfig',
+    'Notification',
     # Libraries
     'rest_framework',
     'rest_framework_simplejwt',
@@ -144,3 +145,10 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
 }
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'password here'
+EMAIL_PORT = 587

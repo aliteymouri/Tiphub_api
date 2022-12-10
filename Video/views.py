@@ -21,7 +21,7 @@ class VideoViewSet(ModelViewSet):
         ser = VideoSerializer(instance=instance, data=self.request.data, partial=True)
         if ser.is_valid():
             ser.save()
-            return Response('Video Updated Successfully', status=status.HTTP_200_OK)
+            return Response('ویدیو با موفقیت بروزرسانی شد', status=status.HTTP_200_OK)
         return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -38,7 +38,7 @@ class AddCommentView(APIView):
         ser = CommentSerializer(instance=video, data=request.data, partial=True)
         if ser.is_valid():
             Comment.objects.create(video=video, author=request.user, text=request.data['text'])
-            return Response(F'Comment Added To {video.title} ', status=status.HTTP_201_CREATED)
+            return Response(F' نظر با موفقیت به {video.title} اضافه شد ', status=status.HTTP_201_CREATED)
         return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -60,7 +60,7 @@ class CommentViewSet(ViewSet):
     def destroy(self, request, pk):
         instance = Comment.objects.get(id=pk)
         instance.delete()
-        return Response("Comment Deleted Successfully", status=status.HTTP_200_OK)
+        return Response("نظر با موفقیت حذف شد", status=status.HTTP_200_OK)
 
 
 class SearchView(ListAPIView):

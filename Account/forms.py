@@ -1,5 +1,4 @@
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import ValidationError
 from .models import User
 from django import forms

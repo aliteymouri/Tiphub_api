@@ -4,8 +4,9 @@ from rest_framework import serializers
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    video = serializers.StringRelatedField(read_only=True,)
+    video = serializers.StringRelatedField(read_only=True, )
     created_at = serializers.SerializerMethodField(read_only=True)
+    author = serializers.SlugRelatedField(read_only=True, slug_field='email')
 
     class Meta:
         model = Comment

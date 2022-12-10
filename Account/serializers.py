@@ -1,10 +1,10 @@
-from django.contrib.auth import password_validation
-from rest_framework import serializers
 from persiantools.jdatetime import JalaliDate
+from rest_framework import serializers
 from Account.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    notifications = serializers.StringRelatedField(many=True, read_only=True)
     date_joined = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_phone(self, value):
         if value[:2] != "09" or len(value) < 11:
-            raise serializers.ValidationError('please enter a valid phone')
+            raise serializers.ValidationError('یک شماره تماس معتبر وارد کنید')
         return value
 
 
@@ -27,11 +27,11 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def validate(self, data):
         if data['new_password'] != data['confirm_password']:
-            raise serializers.ValidationError("The two password fields didn't match.")
+            raise serializers.ValidationError("ررمزعبور مشابه نمیباشد")
         return data
 
     def validate_old_password(self, value):
         user = self.context['request'].user
         if not user.check_password(value):
-            raise serializers.ValidationError('Your old password was entered incorrectly. Please enter it again.')
+            raise serializers.ValidationError('گذرواژه فعلی تان اشتباه وارد شد. لطفا مجدد تلاش کنید')
         return value
