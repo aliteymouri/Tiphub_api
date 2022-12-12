@@ -1,6 +1,6 @@
 from django.db import models
 from Account.models import User
-
+from persiantools.jdatetime import JalaliDate
 
 class Notification(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notification', verbose_name='فرستنده')
@@ -9,7 +9,10 @@ class Notification(models.Model):
     created_at = models.DateTimeField('تاریخ ارسال در', auto_now_add=True)
 
     def __str__(self):
-        return F" اعلان : {self.text} "
+        return F" اعلان : {self.text} به کاربر : {self.user}"
+    
+    def jalali_date(self, obj):
+        return JalaliDate(self.created_at, locale=('fa')).strftime('%c')
 
     class Meta:
         verbose_name = 'اعلان'
