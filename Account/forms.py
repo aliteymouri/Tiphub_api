@@ -6,10 +6,10 @@ from django import forms
 
 class UserCreationForm(forms.ModelForm):
     password = forms.CharField(label='گذرواژه ',
-                               widget=forms.PasswordInput({"placeholder": "گذرواژه", "id": "pass"}))
+                               widget=forms.PasswordInput({"placeholder": "گذرواژه"}))
     confirm_password = forms.CharField(label='تایید گذرواژه ',
                                        widget=forms.PasswordInput(
-                                           {"placeholder": "تایید گذرواژه", "id": "confirm_pass"}))
+                                           {"placeholder": "تایید گذرواژه",}))
 
     class Meta:
         model = User

@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        exclude = ('password', 'last_login', 'user_permissions', 'groups', 'is_superuser')
+        fields = '__all__'
 
     def get_date_joined(self, obj):
         return JalaliDate(obj.date_joined, locale=('fa')).strftime("%c")
@@ -17,6 +17,11 @@ class UserSerializer(serializers.ModelSerializer):
     def validate_phone(self, value):
         if value[:2] != "09" or len(value) < 11:
             raise serializers.ValidationError('یک شماره تماس معتبر وارد کنید')
+        return value
+
+    def validate_password(self, value):
+        if len(value) < 8:
+            raise serializers.ValidationError('رمز عبور وارد شده کمتر از 8 کاراکتر میباشد')
         return value
 
 
@@ -27,7 +32,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def validate(self, data):
         if data['new_password'] != data['confirm_password']:
-            raise serializers.ValidationError("ررمزعبور مشابه نمیباشد")
+            raise serializers.ValidationError("رمزعبور مشابه نمیباشد")
         return data
 
     def validate_old_password(self, value):

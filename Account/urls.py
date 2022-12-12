@@ -1,10 +1,13 @@
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import path
 from . import views
 
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
 app_name = 'account'
 urlpatterns = [
+    # Registeriation
+    path('sign_up', views.SignUpView.as_view()),
+    path('activate/<uidb64>/<token>', views.Activate.as_view(), name='activate'),
+
     path('users', views.UsersListView.as_view()),
     path('logout', views.LogoutView.as_view()),
     path('editprofile', views.EditProfileView.as_view()),
