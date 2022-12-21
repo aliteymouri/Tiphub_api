@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('add/comment/<int:pk>', views.AddCommentView.as_view()),
     path('categories', views.CategoryListView.as_view()),
+    path('categories/<int:pk>', views.CatDetailView.as_view()),
     path('search', views.SearchView.as_view()),
 ]
 

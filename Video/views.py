@@ -3,8 +3,8 @@ from .serializers import VideoSerializer, CategorySerializer, CommentSerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ViewSet, ModelViewSet
+from .models import Video, Category, Comment, SubCategory
 from rest_framework.generics import ListAPIView
-from .models import Video, Category, Comment
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -28,6 +28,14 @@ class VideoViewSet(ModelViewSet):
 class CategoryListView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+
+class CatDetailView(APIView):
+    def get(self, req, **kwargs):
+        sub = SubCategory.objects.get(pk=self.kwargs.get('pk'))
+        videos = sub.videos.all()
+        ser = VideoSerializer(instance=videos, many=True)
+        return Response(ser.data, status=status.HTTP_200_OK)
 
 
 class AddCommentView(APIView):
