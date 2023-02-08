@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps
-    'Video.apps.VideoConfig',
-    'Account.apps.AccountConfig',
-    'Notification',
-    'Info',
+    'apps.Video.apps.VideoConfig',
+    'apps.Account.apps.AccountConfig',
+    'apps.Notification',
+    'apps.Info',
 
 
     # Libraries

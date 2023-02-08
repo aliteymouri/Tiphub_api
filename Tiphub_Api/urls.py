@@ -20,8 +20,8 @@ from . import settings
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('Account.urls')),
-                  path('', include('Video.urls')),
-                  path('', include('Info.urls')),
+                  path('', include('apps.Account.urls')),
+                  path('', include('apps.Video.urls')),
+                  path('', include('apps.Info.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

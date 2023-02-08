@@ -1,6 +1,6 @@
 from persiantools.jdatetime import JalaliDate
 from rest_framework import serializers
-from Account.models import User
+from apps.Account.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

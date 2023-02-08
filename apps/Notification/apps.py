@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class NotificationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Notification'
+    name = 'apps.Notification'
     verbose_name = 'بخش اعلانات'

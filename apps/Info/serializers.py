@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Info.models import BeTeacher
+from apps.Info.models import BeTeacher
 
 
 class BeTeacherSerializer(serializers.ModelSerializer):
