@@ -4,20 +4,20 @@ from .serializers import UserSerializer, ChangePasswordSerializer
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.permissions import IsAdminUser
 from django.template.loader import render_to_string
+from rest_framework.permissions import IsAdminUser
+from django.contrib.auth import login, logout
 from .tokens import account_activation_token
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.core.mail import EmailMessage
-from django.contrib.auth import login
+from rest_framework.views import APIView
 from rest_framework import status
 from .models import User
 
 
 class SignUpView(CreateAPIView):
-    def post(self, request, *args):
-        ser = UserSerializer(data=request.data)
+    def post(self, req, *args):
+        ser = UserSerializer(data=req.data)
         if ser.is_valid():
             user = ser.save()
             user.is_active = False

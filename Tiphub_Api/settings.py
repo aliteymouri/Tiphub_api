@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'Video.apps.VideoConfig',
     'Account.apps.AccountConfig',
     'Notification',
+    'Info',
+
+
     # Libraries
     'rest_framework',
     'rest_framework_simplejwt',
