@@ -1,4 +1,5 @@
 from persiantools.jdatetime import JalaliDate
+from apps.Account.forms import validate_phone
 from rest_framework import serializers
 from apps.Account.models import User
 
@@ -6,6 +7,7 @@ from apps.Account.models import User
 class UserSerializer(serializers.ModelSerializer):
     notifications = serializers.StringRelatedField(many=True, read_only=True)
     date_joined = serializers.SerializerMethodField(read_only=True)
+    phone = serializers.SerializerMethodField(validators=[validate_phone])
 
     class Meta:
         model = User
@@ -13,11 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_date_joined(self, obj):
         return JalaliDate(obj.date_joined, locale=('fa')).strftime("%c")
-
-    def validate_phone(self, value):
-        if value[:2] != "09" or len(value) < 11:
-            raise serializers.ValidationError('یک شماره تماس معتبر وارد کنید')
-        return value
 
     def validate_password(self, value):
         if len(value) < 8:
