@@ -7,7 +7,7 @@ from apps.Account.models import User
 class UserSerializer(serializers.ModelSerializer):
     notifications = serializers.StringRelatedField(many=True, read_only=True)
     date_joined = serializers.SerializerMethodField(read_only=True)
-    phone = serializers.SerializerMethodField(validators=[validate_phone])
+    phone = serializers.CharField(validators=[validate_phone])
 
     class Meta:
         model = User
@@ -15,11 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_date_joined(self, obj):
         return JalaliDate(obj.date_joined, locale=('fa')).strftime("%c")
-
-    def validate_password(self, value):
-        if len(value) < 8:
-            raise serializers.ValidationError('رمز عبور وارد شده کمتر از 8 کاراکتر میباشد')
-        return value
 
 
 class ChangePasswordSerializer(serializers.Serializer):
