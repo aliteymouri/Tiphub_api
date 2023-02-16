@@ -36,7 +36,7 @@ class SignUpView(CreateAPIView):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return Response({"message": 'ایمیلی حاوی یک لینک جهت فعالسازی حساب کاربریتان ارسال شد'},
+            return Response({"message": 'ایمیلی حاوی یک لینک جهت فعالسازی حساب کاربری تان ارسال شد'},
                             status.HTTP_201_CREATED)
         else:
             return Response(ser.errors, status.HTTP_400_BAD_REQUEST)

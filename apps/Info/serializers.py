@@ -1,13 +1,11 @@
 from rest_framework import serializers
 from apps.Info.models import BeTeacher
+from apps.Account.forms import validate_phone
 
 
 class BeTeacherSerializer(serializers.ModelSerializer):
+    phone_number = serializers.CharField(validators=[validate_phone])
+
     class Meta:
         model = BeTeacher
         fields = '__all__'
-
-    def validate_phone(self, value):
-        if value[:2] != "09" or len(value) < 11:
-            raise serializers.ValidationError('یک شماره تماس معتبر وارد کنید')
-        return value
