@@ -9,7 +9,7 @@ urlpatterns = [
     path('sign_up', views.SignUpView.as_view()),
     path('activate/<uidb64>/<token>', views.Activate.as_view(), name='activate'),
 
-    path('users', views.UsersListView.as_view(),'users_list'),
+    path('users', views.UsersListView.as_view(),name='users_list'),
     path('logout', LogoutView.as_view(),name = 'logout'),
     path('edit_profile', views.EditProfileView.as_view(),name='edit_profile'),
     path('userpanel', views.UserPanelView.as_view(),name='userpanel'),

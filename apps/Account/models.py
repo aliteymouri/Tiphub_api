@@ -11,9 +11,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     image = models.ImageField(upload_to="users/profile", null=True, blank=True, verbose_name='عکس پروفایل ')
     bio = models.TextField("بیوگرافی ", null=True, blank=True, )
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ثبت نام ")
+    github = models.URLField('آدرس گیت هاب', blank=True)
+    linkedin = models.URLField('آدرس لینکدین', blank=True)
+    instagram = models.URLField('آدرس اینستاگرام', blank=True)
+    twitter = models.URLField('آدرس توییتر', blank=True)
     is_active = models.BooleanField("وضعیت ", default=True)
     is_admin = models.BooleanField("مدیر سایت  ", default=False)
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
